@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=1280" />
 <title>جذع | JITHA — وكالة تسويق رقمي</title>
 
 <!-- Preload above-the-fold images immediately -->
@@ -189,13 +189,12 @@
   .hero {
     position: relative;
     min-height: 112vh;
+    min-height: 100dvh;                     /* modern: exact visible height incl. chrome */
+    min-height: var(--real-vh, 100dvh);    /* JS-set: true innerHeight on any device */
     display: flex;
     align-items: flex-end;
     overflow: hidden;
     background: #0F0F0B;
-  }
-  @media (max-width: 768px) {
-    .hero { aspect-ratio: unset; min-height: 100svh; align-items: flex-end; }
   }
   .hero__bg {
     position: absolute; inset: 0;
@@ -217,6 +216,18 @@
       background: linear-gradient(180deg, rgba(15,15,11,0.12) 0%, rgba(15,15,11,0.08) 30%, rgba(15,15,11,0.52) 100%);
     }
     .hero__bg { background-position: 65% 45%; }
+  }
+  /* Portrait phones — force landscape (16:9) hero so full image is visible */
+  @media (orientation: portrait) {
+    .hero {
+      min-height: unset;
+      height: auto;
+      aspect-ratio: 16 / 9;
+    }
+    .hero__bg { background-position: center center; }
+    .hero__overlay {
+      background: linear-gradient(180deg, rgba(15,15,11,0.12) 0%, rgba(15,15,11,0.05) 40%, rgba(15,15,11,0.55) 100%);
+    }
   }
 
   .hero__inner {
@@ -1287,6 +1298,14 @@
 
   <!-- ───── Behavior ───── -->
   <script>
+    // ── Real viewport height fix (iOS address-bar / fixed-width viewport) ──
+    (function setVh() {
+      document.documentElement.style.setProperty('--real-vh', window.innerHeight + 'px');
+    })();
+    window.addEventListener('resize', function() {
+      document.documentElement.style.setProperty('--real-vh', window.innerHeight + 'px');
+    });
+
     // ── Mobile nav toggle ──
     const nav = document.getElementById("nav");
     const toggle = document.getElementById("navToggle");
