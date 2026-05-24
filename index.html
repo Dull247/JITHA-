@@ -228,9 +228,9 @@
   }
   /* ── Mobile hero: full image visible, exact image ratio ── */
   @media (max-width: 600px) {
-    /* Logo higher up */
-    .nav { top: 50px; }
-    .nav.scrolled { top: 28px; }
+    /* Logo higher up — pushed to top edge with safe-area for Android notch */
+    .nav { top: max(18px, env(safe-area-inset-top, 18px)); }
+    .nav.scrolled { top: max(10px, env(safe-area-inset-top, 10px)); }
 
     .hero {
       min-height: unset;
@@ -331,7 +331,7 @@
   @media (max-width: 600px) {
     .hero__inner {
       grid-template-columns: 1fr 1.6fr;
-      padding: 0 14px 44px;   /* bottom padding pushes text down from the very edge */
+      padding: 0 14px 60px;   /* bottom padding pushes text down from the very edge */
       align-items: flex-end;
     }
     .hero__content { grid-column: 2 / 3; } /* visual left in RTL = beside the man */
