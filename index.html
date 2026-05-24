@@ -76,7 +76,20 @@
   /* ───── Reset / Base ───── */
   *,*::before,*::after { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; overflow-x: hidden; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased; }
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Stop Android from auto-scaling text — key for matching iPhone */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  /* Hide scrollbar on Android (stops it from shifting layout) */
+  ::-webkit-scrollbar { display: none; }
+  html { scrollbar-width: none; -ms-overflow-style: none; }
+
   * { -webkit-tap-highlight-color: transparent; }
   body {
     font-family: var(--ff);
@@ -86,11 +99,15 @@
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    /* Android renders custom fonts lighter — bump rendering */
+    -webkit-font-feature-settings: "kern" 1, "liga" 1;
+    font-feature-settings: "kern" 1, "liga" 1;
   }
   img { max-width: 100%; display: block; }
   a { color: inherit; text-decoration: none; }
-  button { font-family: inherit; cursor: pointer; border: 0; background: transparent; }
+  button { font-family: inherit; cursor: pointer; border: 0; background: transparent; -webkit-appearance: none; appearance: none; }
 
   .container {
     width: 100%;
@@ -250,7 +267,7 @@
     line-height: 1.08;
     margin: 0 0 26px;
     letter-spacing: -0.01em;
-    text-wrap: balance;
+    overflow-wrap: break-word; text-wrap: balance;
     text-shadow: 0 2px 24px rgba(0,0,0,0.35);
   }
   .hero__title .accent { color: var(--c-orange); }
@@ -440,7 +457,7 @@
     margin: 0 0 18px;
     color: var(--c-ink);
     letter-spacing: -0.005em;
-    text-wrap: balance;
+    overflow-wrap: break-word; text-wrap: balance;
   }
   .about__lead {
     font-size: clamp(15px, 1.2vw, 18px);
@@ -742,7 +759,7 @@
     line-height: 1.45;
     color: var(--c-ink);
     margin: 0;
-    text-wrap: balance;
+    overflow-wrap: break-word; text-wrap: balance;
   }
   @media (max-width: 1024px) {
     .why__grid { grid-template-columns: repeat(2, 1fr); }
@@ -891,7 +908,7 @@
     margin: 0 0 28px;
     color: var(--c-cream);
     line-height: 1.55;
-    text-wrap: balance;
+    overflow-wrap: break-word; text-wrap: balance;
   }
   .cta__sub {
     font-size: clamp(14px, 1.2vw, 17px);
