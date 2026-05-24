@@ -181,7 +181,7 @@
   .nav__search svg { width: 16px; height: 16px; }
   .nav__toggle { display: none; color: #fff; font-size: 24px; padding: 6px; background: rgba(0,0,0,0.25); border-radius: 50%; width: 44px; height: 44px; align-items: center; justify-content: center; }
 
-  @media (max-width: 880px) {
+  @media (max-width: 680px) {
     .nav__pill { display: none; }
     .nav__toggle { display: inline-flex; }
     .nav.open .nav__pill {
@@ -227,12 +227,16 @@
       linear-gradient(180deg, rgba(15,15,11,0.18) 0%, rgba(15,15,11,0) 22%, rgba(15,15,11,0) 70%, rgba(15,15,11,0.28) 100%);
   }
   /* ── Mobile hero: full image visible, exact image ratio ── */
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
+    /* Logo higher up */
+    .nav { top: 50px; }
+    .nav.scrolled { top: 28px; }
+
     .hero {
       min-height: unset;
       height: auto;
-      aspect-ratio: 1600 / 1393;  /* exact hero.jpg ratio → full pic, no empty space */
-      align-items: center;
+      aspect-ratio: 1600 / 1393;
+      align-items: flex-end;        /* push text towards bottom */
     }
     .hero__bg {
       background-size: 100% auto;
@@ -312,7 +316,7 @@
   .hero__cta:hover .arrow { color: var(--c-ink); transform: translateX(-3px); }
   .hero__cta .dot { display: none; }
 
-  @media (max-width: 880px) {
+  @media (max-width: 700px) {
     .hero__inner { grid-template-columns: 1fr; padding: 0 24px 88px; align-items: end; }
     .hero__content { grid-column: 1; }
     .hero__cta { max-width: 100%; font-size: 16px; padding: 15px 32px; }
@@ -324,11 +328,11 @@
     .hero__cta   { font-size: 16px; padding: 15px 28px; border-radius: 999px; }
   }
   /* ── Mobile: text beside the man — overrides 880px single-col above ── */
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     .hero__inner {
-      grid-template-columns: 1fr 1.6fr; /* col-1 RTL=right=man, col-2 RTL=left=text */
-      padding: 0 14px;
-      align-items: center;
+      grid-template-columns: 1fr 1.6fr;
+      padding: 0 14px 44px;   /* bottom padding pushes text down from the very edge */
+      align-items: flex-end;
     }
     .hero__content { grid-column: 2 / 3; } /* visual left in RTL = beside the man */
     .hero__title {
