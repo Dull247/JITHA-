@@ -611,7 +611,7 @@
       grid-row: auto;
     }
   }
-  /* ── Phone (≤600px): single column, stacked top to bottom ── */
+  /* ── Phone (≤600px): single column, stacked ── */
   @media (max-width: 600px) {
     .services { padding: 40px 0 60px; }
     .services__layout { grid-template-columns: 1fr; gap: 36px 0; }
@@ -627,9 +627,9 @@
     .services__layout .svc-card:nth-child(3),
     .services__layout .svc-card:nth-child(4),
     .services__layout .svc-card:nth-child(5) { grid-column: 1; grid-row: auto; }
-    /* Card styling */
+    /* Card layout: icon on right (RTL flex-start = right) */
     .services__layout .svc-card { display: flex; flex-direction: column; gap: 10px; }
-    .services__layout .svc-card__icon { width: 72px; height: 72px; align-self: flex-end; }
+    .services__layout .svc-card__icon { width: 72px; height: 72px; align-self: flex-start; }
     .services__layout .svc-card__body  { width: 100%; }
     .services__layout .svc-card__title { font-size: 19px; line-height: 1.35; margin: 0 0 6px; font-weight: 700; }
     .services__layout .svc-card__desc  { font-size: 13px; max-width: none; margin-inline-start: 0; line-height: 1.75; }
