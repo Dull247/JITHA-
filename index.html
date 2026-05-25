@@ -184,6 +184,10 @@
   @media (max-width: 680px) {
     .nav__pill { display: none; }
     .nav__toggle { display: inline-flex; }
+    .nav__inner {
+      padding-left: max(16px, env(safe-area-inset-left, 16px));
+      padding-right: max(16px, env(safe-area-inset-right, 16px));
+    }
     .nav.open .nav__pill {
       display: flex;
       flex-direction: column;
