@@ -3,11 +3,14 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
 <title>جذع | JITHA — وكالة تسويق رقمي</title>
 
 <!-- Preload above-the-fold images immediately -->
 <link rel="preload" as="image" href="hero.jpg" fetchpriority="high" />
-<link rel="preload" as="image" href="about-pattern.png" />
+<link rel="preload" as="image" href="%23AC956C.png" />
 <link rel="preload" as="image" href="wood-texture.jpg" />
 
 <style>
@@ -230,6 +233,17 @@
       linear-gradient(270deg, rgba(15,15,11,0) 35%, rgba(15,15,11,0.12) 60%, rgba(15,15,11,0.35) 100%),
       linear-gradient(180deg, rgba(15,15,11,0.18) 0%, rgba(15,15,11,0) 22%, rgba(15,15,11,0) 70%, rgba(15,15,11,0.28) 100%);
   }
+  /* ── Desktop nav: bigger logo + search + pill, pushed to corners ── */
+  @media (min-width: 880px) {
+    .nav__inner { max-width: none; padding: 0 40px; }
+    .nav__logo img { height: 160px; }
+    .nav__pill { padding: 12px 16px 12px 32px; gap: 8px; }
+    .nav__links { gap: 6px; }
+    .nav__links a { font-size: 18px; padding: 12px 24px; }
+    .nav__search { width: 54px; height: 54px; }
+    .nav__search svg { width: 26px; height: 26px; }
+  }
+
   /* ── Mobile hero: full image visible, exact image ratio ── */
   @media (max-width: 600px) {
     /* Logo higher up — pushed to top edge with safe-area for Android notch */
@@ -405,7 +419,7 @@
     position: relative;
     width: 100%;
     aspect-ratio: 6063 / 2514;
-    background-image: url("about-pattern.png");
+    background-image: url("%23AC956C.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-position: center;
@@ -484,8 +498,6 @@
     line-height: 1.85;
     color: rgba(20,20,15,0.55);
     font-style: italic;
-    border-right: 2px solid var(--c-teal);
-    padding-right: 14px;
   }
   @media (max-width: 500px) {
     .about__note { font-size: 11px; margin-top: 14px; padding-right: 10px; }
@@ -540,9 +552,109 @@
     .about__lead  { font-size: clamp(11px, 2.8vw, 13px) !important; line-height: 1.8; }
   }
 
+  /* ═════════════ STORY SLIDE ═════════════ */
+  .story-slide { position: relative; }
+
+  /* Top pic — capped so it looks the same on all phone heights */
+  .story-slide__pic1 {
+    position: relative;
+    line-height: 0;
+    overflow: hidden;
+    height: min(44vh, 355px);
+  }
+
+  /* Bottom pic — car, capped the same way */
+  .story-slide__pic2 {
+    position: relative;
+    line-height: 0;
+    overflow: hidden;
+    height: min(40vh, 325px);
+  }
+
+  .story-slide__img1 {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  /* Car: consistent crop — trees visible at all widths */
+  .story-slide__img2 {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: 50% 65%;  /* phone: skip sky+top-trees, show mid-trees/building/car */
+  }
+  /* Tablet — same focal centre as phone, enough % to keep car in frame */
+  @media (min-width: 540px) {
+    .story-slide__img2 { object-position: 50% 60%; }
+  }
+
+  /* PATTERN-06 — centered at pic1 boundary, tiling edge to edge */
+  .story-slide__pat {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 110px;
+    top: calc(min(44vh, 355px) - 55px);
+    background-image: url("PATTERN-06%20-%20Copy.png");
+    background-repeat: round;
+    background-position: center center;
+    background-size: auto 110px;
+    z-index: 2;
+    pointer-events: none;
+  }
+  /* ── Text — base (mobile) ── */
+  .story-slide__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 90px 28px 50px;
+    background: none;
+    line-height: 1.4;
+  }
+  .story-slide__title {
+    font-size: clamp(24px, 7vw, 48px);
+    font-weight: 700;
+    line-height: 1.22;
+    color: var(--c-ink);
+    margin: 0 0 20px;
+    font-family: var(--ff);
+  }
+  .story-slide__sub {
+    font-size: clamp(14px, 3.5vw, 20px);
+    color: var(--c-orange);
+    line-height: 1.65;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  /* ── Desktop 880px+ — all story-slide overrides in ONE block ── */
+  @media (min-width: 880px) {
+    .story-slide__pic1 { height: 780px; }
+    .story-slide__pic2 { height: auto; }
+    .story-slide__img2 { height: auto; object-fit: unset; object-position: unset; }
+    .story-slide__pat {
+      height: 140px;
+      top: calc(780px - 70px);
+      background-repeat: round;
+      background-size: auto 140px;
+      background-position: center center;
+    }
+    .story-slide__overlay {
+      justify-content: flex-end;
+      padding: 160px 10% 140px 60px;
+    }
+    .story-slide__title { max-width: unset; margin: 0; font-size: clamp(44px, 4vw, 68px); }
+  }
+
   /* ═════════════ SERVICES ═════════════ */
   .services {
-    background: var(--c-bg);
+    background: #181818;
     padding: 60px 0 110px;
     position: relative;
     contain: layout paint;
@@ -692,10 +804,10 @@
   }
   .svc-card__list li {
     font-size: 12.5px;
-    background: rgba(20,20,15,0.07);
+    background: #ACC4C7;
     border-radius: 20px;
     padding: 3px 11px;
-    color: var(--c-ink-soft);
+    color: #0A0A0A;
     white-space: nowrap;
     font-weight: 400;
     letter-spacing: 0.01em;
@@ -703,6 +815,13 @@
   @media (max-width: 600px) {
     .svc-card__list li { font-size: 10.5px; padding: 2px 9px; }
   }
+
+  /* Services dark-mode text overrides */
+  .services .section-head__title,
+  .services .section-head__eyebrow { color: #EEEFE0; }
+  .services .section-head__sub { color: rgba(238,239,224,0.7); }
+  .services .svc-card__title { color: #EEEFE0; }
+  .services .svc-card__desc { color: rgba(238,239,224,0.72); }
 
   /* ═════════════ WHY US ═════════════ */
   .why {
@@ -835,9 +954,11 @@
 
   /* ═════════════ PARTNERS ═════════════ */
   .partners {
-    background: var(--c-bg);
-    padding: 110px 0;
+    background: #181818;
+    padding: 48px 0 80px;
   }
+  .partners .section-head__eyebrow { color: rgba(191,206,206,0.7); }
+  .partners .section-head__title   { color: #EEEFE0; }
   .partners__strip {
     margin-top: 56px;
     overflow: hidden;
@@ -855,22 +976,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 92px;
-    min-width: 200px;
-    padding: 0 32px;
-    background: var(--c-bg-alt);
+    height: 80px;
+    min-width: 180px;
+    padding: 0 28px;
+    background: rgba(191,206,206,0.10);
     border-radius: var(--r-md);
-    border: 1px solid rgba(20,20,15,0.06);
-    font-size: 22px;
+    border: 1px solid rgba(191,206,206,0.18);
+    font-size: 20px;
     font-weight: 700;
-    color: var(--c-ink-soft);
+    color: #EEEFE0;
     letter-spacing: 0.02em;
     transition: all 0.3s;
     flex-shrink: 0;
   }
   .partner:hover {
-    background: var(--c-teal);
-    color: var(--c-ink);
+    background: #BFCECE;
+    color: #0A0A0A;
     transform: translateY(-3px);
   }
   @keyframes marquee {
@@ -880,7 +1001,7 @@
 
   /* ═════════════ CONTACT / CTA ═════════════ */
   .cta {
-    background: var(--c-bg);
+    background: #181818;
     padding: 40px 0 110px;
     position: relative;
     contain: layout paint;
@@ -966,27 +1087,38 @@
 
   /* ═════════════ FOOTER PATTERN STRIP ═════════════ */
   .pattern-strip {
-    height: 180px;
-    background-image: url("pattern-outline-tight.png");
-    background-repeat: repeat-x;
-    background-position: bottom center;
-    background-size: auto 160px;
-    background-color: transparent;
-    opacity: 0.45;
+    height: 100px;
+    background-color: #181818;
+    background-image: none;
+    opacity: 1;
     margin-bottom: 0;
     display: block;
     line-height: 0;
+    position: relative;
+    overflow: hidden;
   }
+  .pattern-strip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("PATTERN-03%20-%20Copy.png");
+    background-repeat: round;
+    background-position: center center;
+    background-size: auto 100px;
+  }
+  .pattern-strip::after { display: none; }
   @media (max-width: 880px) {
-    .pattern-strip { height: 130px; background-size: auto 110px; }
+    .pattern-strip { height: 75px; }
+    .pattern-strip::before { background-size: auto 75px; }
   }
   @media (max-width: 540px) {
-    .pattern-strip { height: 90px; background-size: auto 75px; }
+    .pattern-strip { height: 55px; }
+    .pattern-strip::before { background-size: auto 55px; }
   }
 
   /* ═════════════ FOOTER ═════════════ */
   .footer {
-    background: #14140F;
+    background: #181818;
     color: rgba(246,242,234,0.7);
     padding: 64px 0 32px;
     contain: layout paint;
@@ -1136,8 +1268,37 @@
   .services__layout .svc-card:nth-child(4) { transition-delay: 0.10s; }
   .services__layout .svc-card:nth-child(5) { transition-delay: 0.20s; }
 
+  /* ── Performance: skip rendering off-screen content ── */
+  .about, .story-slide, .services, .numbers, .cta, .partners { content-visibility: auto; contain-intrinsic-size: 0 600px; }
+  .footer { content-visibility: auto; contain-intrinsic-size: 0 400px; }
+
   /* ───── Sections base ───── */
   section { scroll-margin-top: 80px; }
+
+  /* ── PC only: scale main content text +10% ── */
+  @media (min-width: 880px) {
+    /* Hero */
+    .hero__title { font-size: clamp(49px, 7.9vw, 110px); }
+    .hero__sub   { font-size: clamp(18px, 1.65vw, 22px); }
+    .hero__cta   { font-size: 19px; }
+
+    /* About (+15%) */
+    .about__title { font-size: clamp(32px, 3.68vw, 51px); }
+    .about__lead  { font-size: clamp(17px, 1.38vw, 21px); }
+    .about__body  { font-size: clamp(17px, 1.38vw, 21px); }
+    .about__note  { font-size: clamp(14px, 1.15vw, 16px); }
+
+    /* Story */
+    .story-slide__title { font-size: clamp(49px, 4.4vw, 75px); }
+
+    /* Services section head */
+    .services .section-head__title { font-size: clamp(37px, 4.62vw, 59px); }
+    .services .section-head__sub   { font-size: clamp(18px, 1.32vw, 21px); }
+
+    /* Service cards */
+    .svc-card__title { font-size: clamp(24px, 2.64vw, 42px); }
+    .svc-card__desc  { font-size: clamp(18px, 1.54vw, 24px); }
+  }
 
 </style>
 </head>
@@ -1218,6 +1379,27 @@
     </div>
   </section>
 
+  <!-- ═════════════ STORY SLIDE ═════════════ -->
+  <section class="story-slide">
+
+    <!-- Pic 1: top half — STORY-19.png with text at the bottom -->
+    <div class="story-slide__pic1">
+      <img src="STORY%20-19.png" alt="" class="story-slide__img1" loading="lazy" decoding="async" />
+      <div class="story-slide__overlay">
+        <h2 class="story-slide__title reveal">كل علامة تجارية تحمل قصة تستحق أن تُروى<br>بالشكل الصحيح</h2>
+      </div>
+    </div>
+
+    <!-- Pic 2: bottom half — car photo only -->
+    <div class="story-slide__pic2">
+      <img src="car%20png.png" alt="" class="story-slide__img2" loading="lazy" decoding="async" />
+    </div>
+
+    <!-- Pattern centered exactly at the boundary between the two pics -->
+    <div class="story-slide__pat"></div>
+
+  </section>
+
   <!-- ═════════════ SERVICES ═════════════ -->
   <section class="services" id="services" data-screen-label="03 Services">
     <div class="container">
@@ -1229,7 +1411,7 @@
         </div>
 
         <article class="svc-card reveal">
-          <div class="svc-card__icon"><img src="icon-megaphone.png" alt="" loading="eager" decoding="async" /></div>
+          <div class="svc-card__icon"><img src="icon-megaphone.png" alt="" loading="lazy" decoding="async" /></div>
           <div class="svc-card__body">
             <h3 class="svc-card__title">حملات المؤثرين</h3>
             <p class="svc-card__desc">ندير حملات تسويقية عبر المؤثرين وصناع المحتوى بما يتناسب مع هوية العلامة التجارية والجمهور المستهدف لتحقيق أفضل نتائج ممكنة.</p>
@@ -1244,7 +1426,7 @@
         </article>
 
         <article class="svc-card reveal">
-          <div class="svc-card__icon"><img src="icon-content.png" alt="" loading="eager" decoding="async" /></div>
+          <div class="svc-card__icon"><img src="icon-content.png" alt="" loading="lazy" decoding="async" /></div>
           <div class="svc-card__body">
             <h3 class="svc-card__title">صناعة المحتوى</h3>
             <p class="svc-card__desc">ننتج محتوى احترافي ومميز مخصص للمنصات الرقمية يساعد العلامات التجارية على جذب الجمهور ورفع التفاعل وبناء حضور قوي في وسائل التواصل الاجتماعي.</p>
@@ -1257,7 +1439,7 @@
         </article>
 
         <article class="svc-card reveal">
-          <div class="svc-card__icon"><img src="icon-strategy.png" alt="" loading="eager" decoding="async" /></div>
+          <div class="svc-card__icon"><img src="icon-strategy.png" alt="" loading="lazy" decoding="async" /></div>
           <div class="svc-card__body">
             <h3 class="svc-card__title">الموشن جرافيك</h3>
             <p class="svc-card__desc">نصنع فيديوهات موشن جرافيك احترافية تساعد على توضيح الأفكار والخدمات بطريقة جذابة وحديثة تعزز من قوة العلامة التجارية.</p>
@@ -1271,7 +1453,7 @@
         </article>
 
         <article class="svc-card reveal">
-          <div class="svc-card__icon"><img src="icon-identity.png" alt="" loading="eager" decoding="async" /></div>
+          <div class="svc-card__icon"><img src="icon-identity.png" alt="" loading="lazy" decoding="async" /></div>
           <div class="svc-card__body">
             <h3 class="svc-card__title">الهوية البصرية</h3>
             <p class="svc-card__desc">نطوّر هويات بصرية احترافية تعكس شخصية العلامة التجارية وتمنحها حضوراً مميزاً يساعدها على المنافسة والظهور بشكل احترافي.</p>
@@ -1303,6 +1485,30 @@
           <div class="cta__actions">
             <a href="https://wa.me/966573698556" target="_blank" rel="noopener" class="cta-btn">تواصل معنا</a>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ PARTNERS ═════════════ -->
+  <section class="partners" id="partners">
+    <div class="container">
+      <div class="section-head reveal" style="text-align:center">
+        <p class="section-head__eyebrow">شركاؤنا</p>
+        <h2 class="section-head__title">شركاء النجاح</h2>
+      </div>
+      <div class="partners__strip">
+        <div class="partners__track">
+          <div class="partner">شريك ١</div>
+          <div class="partner">شريك ٢</div>
+          <div class="partner">شريك ٣</div>
+          <div class="partner">شريك ٤</div>
+          <div class="partner">شريك ٥</div>
+          <div class="partner">شريك ١</div>
+          <div class="partner">شريك ٢</div>
+          <div class="partner">شريك ٣</div>
+          <div class="partner">شريك ٤</div>
+          <div class="partner">شريك ٥</div>
         </div>
       </div>
     </div>
@@ -1385,8 +1591,15 @@
     // ── Single rAF-batched scroll handler (nav + progress bar + parallax) ──
     const progressBar = document.getElementById("scrollProgress");
     const heroBg = document.querySelector(".hero__bg");
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
+    const mq = window.matchMedia("(max-width: 768px)"); const isMobile = () => mq.matches;
     let rafPending = false;
+
+    let heroH = heroBg ? heroBg.parentElement.offsetHeight : 0;
+    let docH = document.documentElement.scrollHeight - window.innerHeight;
+    window.addEventListener('resize', () => {
+      heroH = heroBg ? heroBg.parentElement.offsetHeight : 0;
+      docH = document.documentElement.scrollHeight - window.innerHeight;
+    }, { passive: true });
 
     function onScroll() {
       if (rafPending) return;
@@ -1394,22 +1607,17 @@
       requestAnimationFrame(() => {
         rafPending = false;
         const scrollY = window.scrollY;
-        const docH = document.documentElement.scrollHeight - window.innerHeight;
-
         // Nav state
         if (scrollY > 24) nav.classList.add("scrolled");
         else nav.classList.remove("scrolled");
-
         // Progress bar
         if (progressBar) {
           progressBar.style.transform = "scaleX(" + (docH > 0 ? scrollY / docH : 0) + ")";
         }
-
-        // Parallax — hero image only, desktop + mobile
+        // Parallax — hero image only
         if (heroBg) {
-          const heroH = heroBg.parentElement.offsetHeight;
           if (scrollY < heroH + 120) {
-            const factor = isMobile ? 0.28 : 0.38;
+            const factor = isMobile() ? 0.28 : 0.38;
             heroBg.style.transform = "translateY(" + (scrollY * factor) + "px) translateZ(0)";
           } else {
             heroBg.style.transform = "translateZ(0)";
@@ -1418,7 +1626,7 @@
       });
     }
     window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll(); // run once on load
+    onScroll();
 
     // ── Scroll reveal — bidirectional: slides in when entering, out when leaving ──
     const reveals = document.querySelectorAll(".reveal");
@@ -1433,10 +1641,36 @@
     }, { threshold: 0.12, rootMargin: "0px 0px -30px 0px" });
 
     reveals.forEach(el => io.observe(el));
+
+    // ── Pattern crop helper: removes transparent padding so tiles sit flush ──
+    function cropPattern(src, sx, sy, sw, sh, applyFn) {
+      var scale = 0.5; // render at 50% — still crisp for pattern use
+      var img = new Image();
+      img.src = src;
+      img.onload = function() {
+        var canvas = document.createElement('canvas');
+        canvas.width  = Math.round(sw * scale);
+        canvas.height = Math.round(sh * scale);
+        canvas.getContext('2d').drawImage(img, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(function(blob) {
+          applyFn('url(' + URL.createObjectURL(blob) + ')');
+        }, 'image/webp', 0.92);
+      };
+    }
+    // Defer pattern crops to idle time so they don't block initial paint
+    var idleCrop = window.requestIdleCallback || function(fn){ setTimeout(fn, 200); };
+    idleCrop(function() {
+      cropPattern('PATTERN-06%20-%20Copy.png', 134, 315, 3806, 502, function(url) {
+        var el = document.querySelector('.story-slide__pat');
+        if (el) el.style.backgroundImage = url;
+      });
+      cropPattern('PATTERN-03%20-%20Copy.png', 134, 316, 3806, 500, function(url) {
+        var style = document.createElement('style');
+        style.textContent = '.pattern-strip::before { background-image: ' + url + ' !important; }';
+        document.head.appendChild(style);
+      });
+    });
   </script>
 
 </body>
 </html>
-
-
-
